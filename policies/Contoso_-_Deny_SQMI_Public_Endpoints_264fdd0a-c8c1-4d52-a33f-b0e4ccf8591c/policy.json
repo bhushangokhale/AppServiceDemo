@@ -1,0 +1,49 @@
+{
+ "properties": {
+  "displayName": "Contoso - Deny SQMI Public Endpoints",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "Deny SQMI Public Endpoints",
+  "metadata": {
+   "category": "SQL",
+   "createdBy": "fc54fd84-1484-45e1-9464-d0e24e3ce758",
+   "createdOn": "2022-07-11T16:41:38.8060901Z",
+   "updatedBy": "fc54fd84-1484-45e1-9464-d0e24e3ce758",
+   "updatedOn": "2022-07-11T16:47:44.4684503Z"
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Effect",
+     "description": "Enable or disable the execution of the policy"
+    },
+    "allowedValues": [
+     "deny",
+     "Disabled"
+    ],
+    "defaultValue": "deny"
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allof": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Sql/managedInstances"
+     },
+     {
+      "field": "Microsoft.Sql/managedInstances/publicDataEndpointEnabled",
+      "equals": "true"
+     }
+    ]
+   },
+   "then": {
+    "effect": "[parameters('effect')]"
+   }
+  }
+ },
+ "id": "/subscriptions/66a72222-f1ea-496b-8927-acc899783fa8/providers/Microsoft.Authorization/policyDefinitions/264fdd0a-c8c1-4d52-a33f-b0e4ccf8591c",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "264fdd0a-c8c1-4d52-a33f-b0e4ccf8591c"
+}
